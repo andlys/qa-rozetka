@@ -8,6 +8,7 @@ using System.Threading;
 using OpenQA.Selenium.Interactions;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 using WebDriverWait = OpenQA.Selenium.Support.UI.WebDriverWait;
+using System.Linq;
 
 namespace UnitTestProject1
 {
@@ -22,9 +23,15 @@ namespace UnitTestProject1
         [ClassInitialize]
         public static void InitTests(TestContext ctx) {
             if (usingChrome)
-                driver = new ChromeDriver(igWorkDir, new ChromeOptions());
+            {
+                ChromeOptions options = new ChromeOptions();
+                options.AddArguments("--lang=ru");
+                driver = new ChromeDriver(igWorkDir, options);
+            }
             else
-                ;//driver = new RemoteWebDriver(DesiredCapabilities.HtmlUnitWithJavaScript()); // TODO refactor, doesn't work
+            {
+                //driver = new RemoteWebDriver(DesiredCapabilities.HtmlUnitWithJavaScript()); // TODO refactor, doesn't work
+            }
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(url);
         }
@@ -64,14 +71,20 @@ namespace UnitTestProject1
             searchBtn.Submit();
         }
 
-        private void VerifyAllProductNamesContain(string query)
+        private void VerifyAllProductNamesContain(params string[] queries)
         {
-            IReadOnlyCollection<IWebElement> products = new WebDriverWait(driver, TimeSpan.FromSeconds(3)).Until(drv => drv.FindElements(By.CssSelector("div.g-i-tile-i-box-desc > div.g-i-tile-i-title > a")));
-            Assert.IsTrue(products.Count > 0);
-            Assert.IsTrue(products.Count == 32);
+            IReadOnlyCollection<IWebElement> products = new WebDriverWait(driver, TimeSpan.FromSeconds(3)).Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector("div.g-i-tile-i-box-desc > div.g-i-tile-i-title > a")));
+            Assert.IsTrue(products.Count > 0, "Products count is {0}", products.Count);
+            //Assert.IsTrue(products.Count == 32, "Products count is {0}", products.Count); // commented so as rozetka page shows 27 products for samsung
+            // check if every product's name contains at least one query string
             foreach (IWebElement product in products) {
-                bool expectedTrue = product.Text.ToLower().Contains(query.ToLower());
-                Assert.IsTrue(expectedTrue);
+                bool foundOnceOrMore = false;
+                foreach (string q in queries)
+                {
+                    bool found = product.Text.ToLower().Contains(q.ToLower());
+                    foundOnceOrMore = foundOnceOrMore || found;
+                }
+                Assert.IsTrue(foundOnceOrMore, "Product name {0} is not suitable", product.Text);
             }
         }
 
@@ -88,8 +101,9 @@ namespace UnitTestProject1
         {
             driver.Navigate().GoToUrl("http://rozetka.com.ua/mobile-phones/c80003/preset=smartfon/");
             ApplyFilter("Samsung");
-            //VerifyAllProductNamesContain("Samsung", "Apple"); // TODO
+            VerifyAllProductNamesContain("Samsung");
             ApplyFilter("Apple");
+            VerifyAllProductNamesContain("Samsung", "Apple");
         }
 
         private void ApplyFilter(string filterName)
@@ -126,7 +140,8 @@ namespace UnitTestProject1
         }
 
         private int GetPriceFromString(string priceText) {
-            return Int32.Parse(priceText.Remove(priceText.Length-4).Replace(" ", ""));
+            string digits = priceText.Where(c => Char.IsDigit(c)).Aggregate(String.Empty, (s1, s2) => s1 + s2);
+            return Int32.Parse(digits);
         }
     }
 } 
