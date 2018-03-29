@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Net;
@@ -9,10 +8,11 @@ using OpenQA.Selenium.Interactions;
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 using WebDriverWait = OpenQA.Selenium.Support.UI.WebDriverWait;
 using System.Linq;
+using NUnit.Framework;
 
 namespace UnitTestProject1
 {
-    [TestClass]
+    [TestFixture]
     public class UnitTests
     {
         private static string igWorkDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
@@ -20,8 +20,8 @@ namespace UnitTestProject1
         private static string url = "http://rozetka.com.ua/";
         private static bool usingChrome = true;
 
-        [ClassInitialize]
-        public static void InitTests(TestContext ctx) {
+        [OneTimeSetUp]
+        public static void InitTests() {
             if (usingChrome)
             {
                 ChromeOptions options = new ChromeOptions();
@@ -36,17 +36,17 @@ namespace UnitTestProject1
             driver.Navigate().GoToUrl(url);
         }
 
-        [TestCleanup]
+        [TearDown]
         public void FinishSingleTest() {
             //nothing
         }
 
-        [ClassCleanup]
+        [OneTimeTearDown]
         public static void FinishAllTests() {
             driver.Quit();
         }
 
-        [TestMethod]
+        [Test]
         public void CheckOpenOld() {
             HttpWebResponse response = (HttpWebResponse)WebRequest.CreateHttp(url).GetResponse();
             HttpStatusCode actualStatus = response.StatusCode;
@@ -54,13 +54,18 @@ namespace UnitTestProject1
             Assert.AreEqual(expectedStatus, actualStatus);
         }
         
-        [TestMethod]
+        [Test]
         public void CheckSearchOld()
         {
             string query = "Hyundai";
             SearchFor(query);
             VerifyAllProductNamesContain(query);
             VerifyExistsButtonShowNext32();
+        }
+
+        [Test]
+        public void CheckSearch() {
+
         }
 
         private void SearchFor(string query)
@@ -96,7 +101,7 @@ namespace UnitTestProject1
             Assert.AreEqual(expectedText, actualText);
         }
 
-        [TestMethod]
+        [Test]
         public void CheckSmartphoneFiltersOld()
         {
             driver.Navigate().GoToUrl("http://rozetka.com.ua/mobile-phones/c80003/preset=smartfon/");
@@ -119,10 +124,10 @@ namespace UnitTestProject1
             wait.Until(ExpectedConditions.ElementIsVisible(byFilterApplied));
         }
 
-        [TestMethod]
+        [Test]
         public void CheckSmartphoneSortedByPriceDescOld() {
             CheckSmartphoneFiltersOld();
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
             wait.Until(ExpectedConditions.ElementIsVisible((By.CssSelector("div.sort-view-container > a")))).Click();
             wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.sort-view-container li#filter_sortexpensive"))).Click();
