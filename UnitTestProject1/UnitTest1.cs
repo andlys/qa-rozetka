@@ -115,7 +115,7 @@ namespace UnitTestProject1
             IWebElement productFilter = wait.Until(ExpectedConditions.ElementToBeClickable(by));
             Actions a = new Actions(driver);
             a.Click(driver.FindElement(by)).Build().Perform();
-            By byFilterApplied = By.XPath(String.Format("//span[contains(@class, 'checkbox-active')]/i[text()='{0}']", filterName));
+            By byFilterApplied = By.XPath(String.Format("//a[@class='filter-active-i-link novisited sprite-side' and text()='{0}']", filterName));
             wait.Until(ExpectedConditions.ElementIsVisible(byFilterApplied));
         }
 
@@ -123,6 +123,7 @@ namespace UnitTestProject1
         public void CheckSmartphoneSortedByPriceDesc() {
             CheckSmartphoneFilters();
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
+            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
             wait.Until(ExpectedConditions.ElementIsVisible((By.CssSelector("div.sort-view-container > a")))).Click();
             wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.sort-view-container li#filter_sortexpensive"))).Click();
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class='sort-view-container']/a[contains(text(),'от дорогих к дешевым')]")));
