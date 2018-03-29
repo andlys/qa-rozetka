@@ -13,7 +13,7 @@ using System.Linq;
 namespace UnitTestProject1
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTests
     {
         private static string igWorkDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         private static IWebDriver driver;
@@ -47,7 +47,7 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void CheckOpen() {
+        public void CheckOpenOld() {
             HttpWebResponse response = (HttpWebResponse)WebRequest.CreateHttp(url).GetResponse();
             HttpStatusCode actualStatus = response.StatusCode;
             HttpStatusCode expectedStatus = HttpStatusCode.OK;
@@ -55,7 +55,7 @@ namespace UnitTestProject1
         }
         
         [TestMethod]
-        public void CheckSearch()
+        public void CheckSearchOld()
         {
             string query = "Hyundai";
             SearchFor(query);
@@ -97,7 +97,7 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void CheckSmartphoneFilters()
+        public void CheckSmartphoneFiltersOld()
         {
             driver.Navigate().GoToUrl("http://rozetka.com.ua/mobile-phones/c80003/preset=smartfon/");
             ApplyFilter("Samsung");
@@ -120,8 +120,8 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void CheckSmartphoneSortedByPriceDesc() {
-            CheckSmartphoneFilters();
+        public void CheckSmartphoneSortedByPriceDescOld() {
+            CheckSmartphoneFiltersOld();
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
             wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
             wait.Until(ExpectedConditions.ElementIsVisible((By.CssSelector("div.sort-view-container > a")))).Click();
