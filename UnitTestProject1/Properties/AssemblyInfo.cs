@@ -2,11 +2,11 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("UnitTestProject1")]
+[assembly: AssemblyTitle("TestRozetka")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("EPAM Systems")]
-[assembly: AssemblyProduct("UnitTestProject1")]
+[assembly: AssemblyProduct("TestRozetka")]
 [assembly: AssemblyCopyright("Copyright © EPAM Systems 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

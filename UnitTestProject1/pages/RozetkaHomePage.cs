@@ -6,7 +6,7 @@ using WebDriverWait = OpenQA.Selenium.Support.UI.WebDriverWait;
 using System;
 using System.Collections.Generic;
 
-namespace UnitTestProject1.pages
+namespace TestRozetka.pages
 {
     class RozetkaHomePage
     {

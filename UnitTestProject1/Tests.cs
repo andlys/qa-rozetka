@@ -2,13 +2,13 @@
 using OpenQA.Selenium.Chrome;
 using System.Net;
 using NUnit.Framework;
-using UnitTestProject1.pages;
+using TestRozetka.pages;
 using SeleniumExtras.PageObjects;
 
-namespace UnitTestProject1
+namespace TestRozetka
 {
     [TestFixture]
-    public class UnitTests
+    public class Tests
     {
         private static string igWorkDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         private static IWebDriver driver;
@@ -43,6 +43,7 @@ namespace UnitTestProject1
         }
 
         [Test]
+        [Category("rozetka")]
         public void CheckOpen() {
             HttpWebResponse response = (HttpWebResponse)WebRequest.CreateHttp(url).GetResponse();
             HttpStatusCode actualStatus = response.StatusCode;
@@ -51,6 +52,7 @@ namespace UnitTestProject1
         }
         
         [Test]
+        [Category("rozetka")]
         public void CheckSearch()
         {
             string query = "Hyundai";
@@ -61,6 +63,7 @@ namespace UnitTestProject1
         }
 
         [Test]
+        [Category("rozetka")]
         public void CheckSmartphonesFiltered()
         {
             driver.Navigate().GoToUrl(smartphonesUrl);
@@ -72,6 +75,7 @@ namespace UnitTestProject1
         }
 
         [Test]
+        [Category("rozetka")]
         public void CheckSmartphonesFilteredAndSortedByPriceDesc() {
             RozetkaResultPage page = PageFactory.InitElements<RozetkaResultPage>(driver);
 
