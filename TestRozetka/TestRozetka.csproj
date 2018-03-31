@@ -175,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="other\JavaScripTests.cs" />
+    <Compile Include="other\NUnitAssertionsTests.cs" />
     <Compile Include="other\NUnitAttributes.cs" />
     <Compile Include="pages\RozetkaHomePage.cs" />
     <Compile Include="pages\RozetkaResultPage.cs" />
