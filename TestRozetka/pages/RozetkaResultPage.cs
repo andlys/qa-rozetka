@@ -6,6 +6,8 @@ using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 using WebDriverWait = OpenQA.Selenium.Support.UI.WebDriverWait;
 using NUnit.Framework;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.PageObjects;
+using static TestRozetka.MyDriver;
 
 namespace TestRozetka.pages
 {
@@ -26,11 +28,21 @@ namespace TestRozetka.pages
             wait.Until(ExpectedConditions.ElementIsVisible(byFilterApplied));
         }
 
+        [FindsBy(How = How.XPath, Using = "div.sort-view-container > a")]
+        public IWebElement SortingDropdown;
+
+        [FindsBy(How = How.CssSelector, Using = "div.sort-view-container li#filter_sortexpensive")]
+        private IWebElement ExpensiveFilter;
+
         public void MakeSortedDesc() {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-            wait.Until(ExpectedConditions.ElementIsVisible((By.CssSelector("div.sort-view-container > a")))).Click();
-            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.sort-view-container li#filter_sortexpensive"))).Click();
+            wait.Until(d => SortingDropdown.Displayed);
+            SortingDropdown.Click();
+            wait.Until(d => ExpensiveFilter.Displayed);
+            ExpensiveFilter.Click();
+            //TODO move one line from method below here
+            // TODO run all tests!
         }
 
         public void CheckSortedProductsDesc() {
