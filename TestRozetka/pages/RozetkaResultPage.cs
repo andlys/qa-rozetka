@@ -9,7 +9,7 @@ using OpenQA.Selenium.Interactions;
 
 namespace TestRozetka.pages
 {
-    class RozetkaResultPage : RozetkaHomePage
+    class RozetkaResultPage : RozetkaPage
     {
         public RozetkaResultPage(IWebDriver driver): base(driver) { }
 
@@ -17,7 +17,7 @@ namespace TestRozetka.pages
         {
             string xpathTemplate = "//div[@class='filter-parametrs-i' and @param='producer']//i[text()='{0}']";
             By by = By.XPath(String.Format(xpathTemplate, filterName));
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
             IWebElement productFilter = wait.Until(ExpectedConditions.ElementToBeClickable(by));
             Actions a = new Actions(driver);

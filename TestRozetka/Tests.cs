@@ -4,32 +4,20 @@ using System.Net;
 using NUnit.Framework;
 using TestRozetka.pages;
 using SeleniumExtras.PageObjects;
+using static TestRozetka.MyDriver;
 
 namespace TestRozetka
 {
     [TestFixture]
     public class Tests
     {
-        private static string igWorkDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        private static IWebDriver driver;
         private static string url = "http://rozetka.com.ua/",
             smartphonesUrl = "http://rozetka.com.ua/mobile-phones/c80003/preset=smartfon/";
-        private static bool usingChrome = true;
 
         [OneTimeSetUp]
         public static void InitTests() {
-            if (usingChrome)
-            {
-                ChromeOptions options = new ChromeOptions();
-                options.AddArguments("--lang=ru");
-                driver = new ChromeDriver(igWorkDir, options);
-            }
-            else
-            {
-                //driver = new RemoteWebDriver(DesiredCapabilities.HtmlUnitWithJavaScript()); // TODO refactor, doesn't work
-            }
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl(url);
+            GetDriver().Manage().Window.Maximize();
+            GetDriver().Navigate().GoToUrl(url);
         }
 
         [TearDown]
@@ -39,7 +27,7 @@ namespace TestRozetka
 
         [OneTimeTearDown]
         public static void FinishAllTests() {
-            driver.Quit();
+            GetDriver().Quit();
         }
 
         [Test]
@@ -56,7 +44,7 @@ namespace TestRozetka
         public void CheckSearch()
         {
             string query = "Hyundai";
-            RozetkaHomePage page = PageFactory.InitElements<RozetkaHomePage>(driver);
+            RozetkaPage page = PageFactory.InitElements<RozetkaPage>(GetDriver());
             page.SearchFor(query);
             page.VerifyAllProductNamesContain(query);
             page.VerifyExistsButtonShowNext32();
@@ -66,8 +54,8 @@ namespace TestRozetka
         [Category("rozetka")]
         public void CheckSmartphonesFiltered()
         {
-            driver.Navigate().GoToUrl(smartphonesUrl);
-            RozetkaResultPage page = PageFactory.InitElements<RozetkaResultPage>(driver);
+            GetDriver().Navigate().GoToUrl(smartphonesUrl);
+            RozetkaResultPage page = PageFactory.InitElements<RozetkaResultPage>(GetDriver());
             page.ApplyFilter("Samsung");
             page.VerifyAllProductNamesContain("Samsung");
             page.ApplyFilter("Apple");
@@ -77,9 +65,9 @@ namespace TestRozetka
         [Test]
         [Category("rozetka")]
         public void CheckSmartphonesFilteredAndSortedByPriceDesc() {
-            RozetkaResultPage page = PageFactory.InitElements<RozetkaResultPage>(driver);
+            RozetkaResultPage page = PageFactory.InitElements<RozetkaResultPage>(GetDriver());
 
-            driver.Navigate().GoToUrl(smartphonesUrl);
+            GetDriver().Navigate().GoToUrl(smartphonesUrl);
             page.ApplyFilter("Samsung");
             page.VerifyAllProductNamesContain("Samsung");
             page.ApplyFilter("Apple");

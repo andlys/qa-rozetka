@@ -8,11 +8,11 @@ using System.Collections.Generic;
 
 namespace TestRozetka.pages
 {
-    class RozetkaHomePage
+    class RozetkaPage
     {
         protected IWebDriver driver;
 
-        public RozetkaHomePage(IWebDriver driver)
+        public RozetkaPage(IWebDriver driver)
         {
             this.driver = driver;
         }
