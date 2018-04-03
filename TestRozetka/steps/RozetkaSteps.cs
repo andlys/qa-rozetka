@@ -11,7 +11,7 @@ namespace TestRozetka.steps
 {
     class RozetkaSteps
     {
-        private RozetkaPage page;
+        protected RozetkaPage page;
 
         public RozetkaSteps(RozetkaPage page) {
             this.page = page;
@@ -50,7 +50,7 @@ namespace TestRozetka.steps
             Assert.AreEqual(expectedText, actualText);
         }
 
-        public virtual void ApplyFilter(params String[] arg) { }
+        public virtual void ApplyFilter(String arg) { }
 
         public virtual void MakeSortedDesc() { }
 

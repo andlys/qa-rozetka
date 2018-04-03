@@ -57,7 +57,7 @@ namespace TestRozetka
         public void CheckSmartphonesFiltered()
         {
             RozetkaResultPage page = PageFactory.InitElements<RozetkaResultPage>(GetDriver());
-            RozetkaSteps steps = new RozetkaSteps(page);
+            RozetkaSteps steps = new RozetkaResultSteps(page);
             steps.Open();
             steps.ApplyFilter("Samsung");
             steps.VerifyAllProductNamesContain("Samsung");
@@ -69,7 +69,7 @@ namespace TestRozetka
         [Category("rozetka")]
         public void CheckSmartphonesFilteredAndSortedByPriceDesc() {
             RozetkaResultPage page = PageFactory.InitElements<RozetkaResultPage>(GetDriver());
-            RozetkaSteps steps = new RozetkaSteps(page);
+            RozetkaSteps steps = new RozetkaResultSteps(page);
             steps.Open();
 
             steps.ApplyFilter("Samsung");
