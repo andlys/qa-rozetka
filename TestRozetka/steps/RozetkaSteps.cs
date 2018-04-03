@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestRozetka.pages;
+using static TestRozetka.MyDriver;
 
 namespace TestRozetka.steps
 {
@@ -15,6 +16,9 @@ namespace TestRozetka.steps
             this.page = page;
         }
 
+        public void Open() {
+            GetDriver().Navigate().GoToUrl(page.Url);
+        }
 
     }
 }

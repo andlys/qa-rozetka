@@ -6,14 +6,16 @@ using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 using WebDriverWait = OpenQA.Selenium.Support.UI.WebDriverWait;
 using NUnit.Framework;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.PageObjects;
-using static TestRozetka.MyDriver;
+using SeleniumExtras.PageObjects;
 
 namespace TestRozetka.pages
 {
     class RozetkaResultPage : RozetkaPage
     {
-        public RozetkaResultPage(IWebDriver driver): base(driver) { }
+
+        public RozetkaResultPage(IWebDriver driver): base(driver) {
+            base.url = "http://rozetka.com.ua/mobile-phones/c80003/preset=smartfon/";
+        }
 
         public void ApplyFilter(string filterName)
         {
@@ -28,11 +30,11 @@ namespace TestRozetka.pages
             wait.Until(ExpectedConditions.ElementIsVisible(byFilterApplied));
         }
 
-        [FindsBy(How = How.XPath, Using = "div.sort-view-container > a")]
+        [FindsBy(How = How.CssSelector, Using = "div.sort-view-container > a")]
         public IWebElement SortingDropdown;
 
         [FindsBy(How = How.CssSelector, Using = "div.sort-view-container li#filter_sortexpensive")]
-        private IWebElement ExpensiveFilter;
+        public IWebElement ExpensiveFilter;
 
         public void MakeSortedDesc() {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));

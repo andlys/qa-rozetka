@@ -11,10 +11,13 @@ namespace TestRozetka.pages
     class RozetkaPage
     {
         protected IWebDriver driver;
+        protected string url;
+        public string Url { get { return url; } }
 
         public RozetkaPage(IWebDriver driver)
         {
             this.driver = driver;
+            this.url = "http://rozetka.com.ua/";
         }
 
         [FindsBy(How = How.XPath, Using = "")]
