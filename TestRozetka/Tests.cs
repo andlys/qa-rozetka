@@ -32,12 +32,13 @@ namespace TestRozetka
         [Category("rozetka")]
         public void CheckOpen() {
             RozetkaPage page = PageFactory.InitElements<RozetkaPage>(GetDriver());
-            HttpWebResponse response = (HttpWebResponse)WebRequest.CreateHttp(page.Url).GetResponse();
-            HttpStatusCode actualStatus = response.StatusCode;
-            HttpStatusCode expectedStatus = HttpStatusCode.OK;
-            Assert.AreEqual(expectedStatus, actualStatus);
+            RozetkaSteps steps = new RozetkaSteps(page);
+            steps.Open();
+            string actualTitle = GetDriver().Title,
+                 expectedBeginningOfTitle = "Интернет-магазин ROZETKA";
+            Assert.IsTrue(actualTitle.StartsWith(expectedBeginningOfTitle));
         }
-        
+
         [Test]
         [Category("rozetka")]
         public void CheckSearch()
@@ -46,9 +47,9 @@ namespace TestRozetka
             RozetkaPage page = PageFactory.InitElements<RozetkaPage>(GetDriver());
             RozetkaSteps steps = new RozetkaSteps(page);
             steps.Open();
-            page.SearchFor(query);
-            page.VerifyAllProductNamesContain(query);
-            page.VerifyExistsButtonShowNext32();
+            steps.SearchFor(query);
+            steps.VerifyAllProductNamesContain(query);
+            steps.VerifyExistsButtonShowNext32();
         }
 
         [Test]
@@ -58,10 +59,10 @@ namespace TestRozetka
             RozetkaResultPage page = PageFactory.InitElements<RozetkaResultPage>(GetDriver());
             RozetkaSteps steps = new RozetkaSteps(page);
             steps.Open();
-            page.ApplyFilter("Samsung");
-            page.VerifyAllProductNamesContain("Samsung");
-            page.ApplyFilter("Apple");
-            page.VerifyAllProductNamesContain("Samsung", "Apple");
+            steps.ApplyFilter("Samsung");
+            steps.VerifyAllProductNamesContain("Samsung");
+            steps.ApplyFilter("Apple");
+            steps.VerifyAllProductNamesContain("Samsung", "Apple");
         }
 
         [Test]
@@ -71,13 +72,13 @@ namespace TestRozetka
             RozetkaSteps steps = new RozetkaSteps(page);
             steps.Open();
 
-            page.ApplyFilter("Samsung");
-            page.VerifyAllProductNamesContain("Samsung");
-            page.ApplyFilter("Apple");
-            page.VerifyAllProductNamesContain("Samsung", "Apple");
-            
-            page.MakeSortedDesc();
-            page.CheckSortedProductsDesc();
+            steps.ApplyFilter("Samsung");
+            steps.VerifyAllProductNamesContain("Samsung");
+            steps.ApplyFilter("Apple");
+            steps.VerifyAllProductNamesContain("Samsung", "Apple");
+
+            steps.MakeSortedDesc();
+            steps.CheckSortedProductsDesc();
         }
         
     }

@@ -180,6 +180,7 @@
     <Compile Include="other\NUnitAttributes.cs" />
     <Compile Include="pages\RozetkaPage.cs" />
     <Compile Include="pages\RozetkaResultPage.cs" />
+    <Compile Include="steps\RozetkaResultSteps.cs" />
     <Compile Include="steps\RozetkaSteps.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
