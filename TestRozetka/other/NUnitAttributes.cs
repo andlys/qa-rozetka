@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace UnitTestProject1.other
+namespace TestRozetka.other
 {
     [TestFixture]
     class NUnitAttributeTests
