@@ -29,7 +29,10 @@ namespace TestRozetka.steps
 
         public void VerifyAllProductNamesContain(params string[] queries)
         {
-            new WebDriverWait(GetDriver(), TimeSpan.FromSeconds(3)).Until(d => page.Products.All(elt => elt.Displayed));
+            WebDriverWait wait = new WebDriverWait(GetDriver(), TimeSpan.FromSeconds(3));
+            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+            wait.Until(d => page.Products.All(elt => elt.Displayed));
+            //wait.Until(d => page.ProductsContainer.Displayed);
             Assert.IsTrue(page.Products.Count > 0, "Products count is {0}", page.Products.Count);
             foreach (IWebElement product in page.Products)
             {

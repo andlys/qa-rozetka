@@ -33,6 +33,5 @@ namespace TestRozetka.pages
         [FindsBy(How = How.CssSelector, Using = "div.g-i-tile-i-box-desc div.g-price-uah")]
         public IList<IWebElement> ProductsPrices;
 
-
     }
 }

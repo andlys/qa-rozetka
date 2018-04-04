@@ -29,5 +29,8 @@ namespace TestRozetka.pages
         [FindsBy(How = How.CssSelector, Using = "span.g-i-more-link-text")]
         public IWebElement BtnNext32;
 
+        [FindsBy(How = How.CssSelector, Using = "div.g-i-tile-i-box-desc")]
+        public IWebElement ProductsContainer;
+
     }
 }

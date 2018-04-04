@@ -35,7 +35,7 @@ namespace TestRozetka.steps
             return by;
         }
 
-        public new void ApplyFilter(string filterName)
+        public override void ApplyFilter(string filterName)
         {
             By byFilter = ByFilter(filterName);
             WebDriverWait wait = new WebDriverWait(GetDriver(), TimeSpan.FromSeconds(5));
@@ -48,7 +48,7 @@ namespace TestRozetka.steps
             wait.Until(ExpectedConditions.ElementIsVisible(byFilterApplied));
         }
 
-        public new void MakeSortedDesc()
+        public override void MakeSortedDesc()
         {
             WebDriverWait wait = new WebDriverWait(GetDriver(), TimeSpan.FromSeconds(5));
             wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
@@ -59,7 +59,7 @@ namespace TestRozetka.steps
             wait.Until(d => Page.AppliedSortingLabel.Displayed);
         }
 
-        public new void CheckSortedProductsDesc()
+        public override void CheckSortedProductsDesc()
         {
             WebDriverWait wait = new WebDriverWait(GetDriver(), TimeSpan.FromSeconds(5));
             wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
