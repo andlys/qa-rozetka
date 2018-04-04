@@ -2,4 +2,14 @@ packages
 TestResults
 TestRozetka/bin
 TestRozetka/obj
+Test/bin
+Test/obj
+PageObject/bin
+PageObject/obj
+Context/bin
+Context/obj
+Core/bin
+Core/obj
 .vs
+obj/
+bin/

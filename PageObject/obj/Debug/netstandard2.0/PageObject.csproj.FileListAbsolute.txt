@@ -1,0 +1,8 @@
+D:\Andrii_Lysenko\git\qa-rozetka\PageObject\bin\Debug\netstandard2.0\PageObject.deps.json
+D:\Andrii_Lysenko\git\qa-rozetka\PageObject\bin\Debug\netstandard2.0\PageObject.dll
+D:\Andrii_Lysenko\git\qa-rozetka\PageObject\bin\Debug\netstandard2.0\PageObject.pdb
+D:\Andrii_Lysenko\git\qa-rozetka\PageObject\obj\Debug\netstandard2.0\PageObject.csproj.CoreCompileInputs.cache
+D:\Andrii_Lysenko\git\qa-rozetka\PageObject\obj\Debug\netstandard2.0\PageObject.AssemblyInfoInputs.cache
+D:\Andrii_Lysenko\git\qa-rozetka\PageObject\obj\Debug\netstandard2.0\PageObject.AssemblyInfo.cs
+D:\Andrii_Lysenko\git\qa-rozetka\PageObject\obj\Debug\netstandard2.0\PageObject.dll
+D:\Andrii_Lysenko\git\qa-rozetka\PageObject\obj\Debug\netstandard2.0\PageObject.pdb

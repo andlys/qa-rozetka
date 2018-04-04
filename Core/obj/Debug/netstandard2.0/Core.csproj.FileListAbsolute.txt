@@ -1,0 +1,8 @@
+D:\Andrii_Lysenko\git\qa-rozetka\Core\bin\Debug\netstandard2.0\Core.deps.json
+D:\Andrii_Lysenko\git\qa-rozetka\Core\bin\Debug\netstandard2.0\Core.dll
+D:\Andrii_Lysenko\git\qa-rozetka\Core\bin\Debug\netstandard2.0\Core.pdb
+D:\Andrii_Lysenko\git\qa-rozetka\Core\obj\Debug\netstandard2.0\Core.csproj.CoreCompileInputs.cache
+D:\Andrii_Lysenko\git\qa-rozetka\Core\obj\Debug\netstandard2.0\Core.AssemblyInfoInputs.cache
+D:\Andrii_Lysenko\git\qa-rozetka\Core\obj\Debug\netstandard2.0\Core.AssemblyInfo.cs
+D:\Andrii_Lysenko\git\qa-rozetka\Core\obj\Debug\netstandard2.0\Core.dll
+D:\Andrii_Lysenko\git\qa-rozetka\Core\obj\Debug\netstandard2.0\Core.pdb
