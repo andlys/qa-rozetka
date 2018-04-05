@@ -2,7 +2,6 @@
 using SeleniumExtras.PageObjects;
 using System.Collections.Generic;
 
-
 namespace PageObject
 {
     public class RozetkaPage
