@@ -59,19 +59,19 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpecFlowFeature1.feature.cs">
+    <Compile Include="CalculatorSteps.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SpecFlowFeature1.feature</DependentUpon>
+      <DependentUpon>CalculatorSteps.feature</DependentUpon>
     </Compile>
-    <Compile Include="SpecFlowFeature1Steps.cs" />
+    <Compile Include="CalculatorSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="SpecFlowFeature1.feature">
+    <None Include="CalculatorSteps.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SpecFlowFeature1.feature.cs</LastGenOutput>
+      <LastGenOutput>CalculatorSteps.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
